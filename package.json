@@ -1,0 +1,59 @@
+{
+  "name": "antd-draggable-modal",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "qi.futao",
+  "keywords": [
+    "antd modal拖拽",
+    "ant-design modal拖拽",
+    "ant-design draggable modal"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/astonishqft/antd-draggable-modal"
+  },
+  "bugs": {
+    "url": "https://github.com/astonishqft/antd-draggable-modal/issues"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "module": "dist/antd-draggable-modal.esm.js",
+  "devDependencies": {
+    "@types/jest": "^25.1.3",
+    "@types/react": "^16.9.22",
+    "@types/react-dom": "^16.9.5",
+    "husky": "^4.2.3",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "tsdx": "^0.12.3",
+    "tslib": "^1.11.0",
+    "typescript": "^3.8.2"
+  },
+  "dependencies": {
+    "antd": "^3.26.12"
+  }
+}
