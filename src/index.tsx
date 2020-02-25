@@ -1,5 +1,6 @@
 import React, { Component, MouseEvent } from 'react';
-import AntdModal, { ModalProps } from "antd/lib/modal";
+import AntdModal, { ModalProps } from 'antd/lib/modal';
+import 'antd/es/modal/style/index.css';
 
 interface IState {
   visible: boolean,
@@ -106,7 +107,7 @@ export default class AntDraggableModal extends Component<ModalProps, IState> {
   }
 
   render() {
-    const { children, wrapClassName, visible = false, ...other } = this.props;
+    const { children, wrapClassName, ...other } = this.props;
 
     const wrapModalClassName = wrapClassName ? `${wrapClassName} ${this.simpleClass}` : `${this.simpleClass}`;
 
