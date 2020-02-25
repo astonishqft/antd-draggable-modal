@@ -100,10 +100,13 @@ export default class AntDraggableModal extends Component<ModalProps, IState> {
     window.removeEventListener("mouseup", this.removeUp, false);
   }
 
+  componentDidUpdate() {
+    const { visible = false } = this.props;
+    this.initialEvent(visible);
+  }
+
   render() {
     const { children, wrapClassName, visible = false, ...other } = this.props;
-
-    this.initialEvent(visible);
 
     const wrapModalClassName = wrapClassName ? `${wrapClassName} ${this.simpleClass}` : `${this.simpleClass}`;
 
