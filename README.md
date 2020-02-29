@@ -8,6 +8,11 @@
 - 支持拖拽 title bar 实现拖拽
 - 支持多层弹窗拖拽
 
+安装:
+```bash
+$ yarn add antd-draggable-modal
+```
+
 用法:
 
 ```js
