@@ -2,11 +2,7 @@ import React, { Component, MouseEvent } from 'react';
 import AntdModal, { ModalProps } from 'antd/lib/modal';
 import 'antd/es/modal/style/index.css';
 
-interface IState {
-  visible: boolean;
-}
-
-export default class AntDraggableModal extends Component<ModalProps, IState> {
+export default class AntDraggableModal extends Component<ModalProps> {
   private simpleClass: string;
   private header: any;
   private contain: any;
@@ -26,10 +22,6 @@ export default class AntDraggableModal extends Component<ModalProps, IState> {
       .substring(2);
   }
 
-  state = {
-    visible: false,
-  };
-
   handleMove = (event: any) => {
     const deltaX = event.pageX - this.mouseDownX;
     const deltaY = event.pageY - this.mouseDownY;
@@ -39,15 +31,6 @@ export default class AntDraggableModal extends Component<ModalProps, IState> {
 
     this.modalContent.style.transform = `translate(${deltaX + this.sumX}px, ${deltaY + this.sumY}px)`;
   };
-
-  resetPosition = () => {
-    this.mouseDownX = 0;
-    this.mouseDownY = 0;
-    this.deltaX = 0;
-    this.deltaY = 0;
-    this.sumX = 0;
-    this.sumY = 0;
-  }
 
   initialEvent = (visible: boolean) => {
     const { title } = this.props;
@@ -70,22 +53,7 @@ export default class AntDraggableModal extends Component<ModalProps, IState> {
         window.addEventListener('mouseup', this.removeUp, false);
       }, 0);
     }
-
-    if (!visible) {
-      this.resetPosition();
-    }
   };
-
-  static getDerivedStateFromProps(nextProps: ModalProps, prevState: IState) {
-    const { visible } = nextProps;
-    if (visible !== prevState.visible) {
-      return {
-        visible,
-      };
-    }
-
-    return null;
-  }
 
   removeMove = () => {
     window.removeEventListener('mousemove', this.handleMove, false);
@@ -108,11 +76,6 @@ export default class AntDraggableModal extends Component<ModalProps, IState> {
   componentWillUnmount() {
     this.removeMove();
     window.removeEventListener('mouseup', this.removeUp, false);
-  }
-
-  componentDidUpdate() {
-    const { visible = false } = this.props;
-    this.initialEvent(visible);
   }
 
   render() {
