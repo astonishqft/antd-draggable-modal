@@ -7,6 +7,7 @@ export default class AntDraggableModal extends Component<ModalProps> {
   private header: any;
   private contain: any;
   private modalContent: any;
+  private antdModal: any;
 
   private mouseDownX: number = 0;
   private mouseDownY: number = 0;
@@ -23,14 +24,30 @@ export default class AntDraggableModal extends Component<ModalProps> {
   }
 
   handleMove = (event: any) => {
+    if (!this.modalContent) return;
     const deltaX = event.pageX - this.mouseDownX;
     const deltaY = event.pageY - this.mouseDownY;
+    
+    // 计算新的位置
+    let newX = this.sumX + deltaX;
+    let newY = this.sumY + deltaY;
+    
+    // 获取模态框的宽度和高度
+    const modalWidth = this.modalContent.offsetWidth;
+    const modalHeight = this.modalContent.offsetHeight;
+    
+    // 获取浏览器可视区域的宽度和高度
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    // 限制模态框在可视区域内
+    newX = Math.max(-((viewportWidth - modalWidth)/2), Math.min(newX, (viewportWidth - modalWidth)/2));
+    newY = Math.max(-((viewportHeight - modalHeight)/2), Math.min(newY, (viewportHeight - modalHeight)/2));
 
-    this.deltaX = deltaX;
-    this.deltaY = deltaY;
-
-    this.modalContent.style.transform = `translate(${deltaX + this.sumX}px, ${deltaY + this.sumY}px)`;
+    // 更新位置
+    this.modalContent.style.transform = `translate(${newX}px, ${newY}px)`;
   };
+
 
   initialEvent = (visible: boolean) => {
     const { title } = this.props;
@@ -41,6 +58,16 @@ export default class AntDraggableModal extends Component<ModalProps> {
         this.contain = document.getElementsByClassName(this.simpleClass)[0];
         this.header = this.contain.getElementsByClassName('ant-modal-header')[0];
         this.modalContent = this.contain.getElementsByClassName('ant-modal-content')[0];
+        this.antdModal = document.getElementsByClassName('ant-modal')[0];
+
+        // 获取模态框的宽度和高度
+        const modalHeight = this.modalContent.offsetHeight;
+        
+        // 获取浏览器可视区域的宽度和高度
+        const viewportHeight = window.innerHeight;
+        // this.antdModal.style.top = '0px';
+        this.antdModal.style.top = (viewportHeight - modalHeight)/2+'px';
+        this.antdModal.style.padding = '0px';
 
         this.header.style.cursor = 'all-scroll';
         this.header.onmousedown = (e: MouseEvent<HTMLDivElement>) => {
