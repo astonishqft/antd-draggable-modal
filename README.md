@@ -1,3 +1,5 @@
+
+
 # 基于Ant-design的可以拖拽的Modal
 
 基于Ant-design的可以拖拽的Modal
@@ -12,6 +14,8 @@
 
 安装:
 ```bash
+$ npm install antd-draggable-modal
+# or
 $ yarn add antd-draggable-modal
 ```
 
